@@ -8,14 +8,13 @@ package edu.pro.projectbasic.service;
 */
 
 import edu.pro.projectbasic.model.Patient;
-import edu.pro.projectbasic.repository.PatientRepositoryAsList;
 import edu.pro.projectbasic.repository.PatientRepositoryMongo;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PatientService {
@@ -36,5 +35,21 @@ public class PatientService {
     public List<Patient> getAll(){
         return repository.findAll();
     }
+    public Optional<Patient> getById(String id){
+        return repository.findById(id);
+    }
+    public Patient create(Patient patient){
+        return repository.save(patient);
+    }
+    public Patient update(Patient patient){
+        return repository.save(patient);
+    }
+
+    public Patient delete(String id){
+        Patient patient = this.getById(id).get();
+        repository.deleteById(id);
+        return patient;
+    }
+
 
 }
