@@ -9,6 +9,7 @@ package edu.pro.projectbasic.service;
 
 import edu.pro.projectbasic.model.Patient;
 import edu.pro.projectbasic.repository.PatientRepositoryAsList;
+import edu.pro.projectbasic.repository.PatientRepositoryMongo;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,19 @@ import java.util.List;
 
 @Service
 public class PatientService {
-//    private List<Patient> patients = List.of(new Patient("1", "John", "123 ", LocalDateTime.now()),
-//            new Patient("2", "Paul", "456 ", LocalDateTime.now()),
-//            new Patient("3", "Paul", "456 ", LocalDateTime.now()),
-//            new Patient("4", "George", "000", LocalDateTime.now()));
+    private List<Patient> patients = List.of(
+            new Patient("1", "John", "123 ", LocalDateTime.now()),
+            new Patient("2", "Paul", "456 ", LocalDateTime.now()),
+            new Patient("3", "Ringo", "789 ", LocalDateTime.now()),
+            new Patient("4", "George", "000", LocalDateTime.now()));
 
     @Autowired
-    PatientRepositoryAsList repository;
+    PatientRepositoryMongo repository;
+
+    // @PostConstruct
+    void init(){
+        repository.saveAll(patients);
+    }
 
     public List<Patient> getAll(){
         return repository.findAll();
