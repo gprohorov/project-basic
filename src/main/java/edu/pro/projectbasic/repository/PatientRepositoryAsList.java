@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 /*
   @author   george
@@ -24,6 +25,11 @@ public class PatientRepositoryAsList {
 
     public List<Patient> findAll() {
         return patients;
+    }
+
+    public Optional<Patient> findById(String id) {
+        return patients.stream().filter(patient -> patient.getId().equals(id))
+                .findFirst();
     }
 
 }

@@ -10,6 +10,8 @@ package edu.pro.projectbasic.controller;
 import edu.pro.projectbasic.model.Patient;
 import edu.pro.projectbasic.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +35,11 @@ public class PatientController {
     @RequestMapping("/")
     public List<Patient> getPatients(){
         return service.getAll();
+    }
+
+    @RequestMapping("/{id}")
+    public Patient getPatient(@PathVariable("id") String id) throws ChangeSetPersister.NotFoundException {
+        return service.get(id);
     }
 
 

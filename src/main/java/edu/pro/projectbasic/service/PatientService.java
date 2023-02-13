@@ -11,6 +11,7 @@ import edu.pro.projectbasic.model.Patient;
 import edu.pro.projectbasic.repository.PatientRepositoryAsList;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -30,4 +31,8 @@ public class PatientService {
         return repository.findAll();
     }
 
+    public Patient get(String id)  {
+       return repository.findById(id)
+               .orElseThrow(() -> new IllegalStateException("Not found"));
+    }
 }
